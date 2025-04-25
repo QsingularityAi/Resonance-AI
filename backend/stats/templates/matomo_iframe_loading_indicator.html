@@ -1,0 +1,20 @@
+{% block matomo_iframe_loading_indicator %}
+<script>
+  document.querySelectorAll('.matomo-iframe').forEach(element => {
+
+    let iframes = element.querySelectorAll('iframe')
+    let spinners = element.querySelectorAll('.matomo-iframe-spinner')
+
+    iframes.forEach(iframe => {
+
+      iframe.addEventListener('load', () => {
+        setTimeout(() => {
+          spinners.forEach(e => e.remove())
+          iframe.classList.toggle('d-none')
+        }, 100)
+      })
+    })
+
+  });
+</script>
+{% endblock %}

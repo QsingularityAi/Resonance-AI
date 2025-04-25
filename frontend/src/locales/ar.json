@@ -1,0 +1,66 @@
+{
+  "chatDisplay": "عرض المحادثة",
+  "chatRating": "تقييم المحادثة:",
+  "chatReset": "إعادة تعيين المحادثة",
+  "contact": {
+    "buttonLabel": "اتصل بموظف",
+    "contactPerson": {
+      "content": "جهة الاتصال للمحتوى",
+      "technical": "مسؤول الاتصال الفني"
+    },
+    "intro": "ترغب في التواصل مع موظف{توقيع} يرجى التواصل مع الشخص المعني إذا كان لديك أي أسئلة متعلقة بالمحتوى أو أسئلة فنية."
+  },
+  "contactSupport": "هل ترغب في الاتصال بموظف؟",
+  "contrast": "تباين عالي",
+  "copySourceCodeAction": "نسخ التعليمات البرمجية المصدرية",
+  "copySourceCodeActionIconAltText": "نسخ رمز شفرة المصدر",
+  "error": {
+    "generic": "حدث خطأ.",
+    "network": "لا يمكن الرد على استفسارك في الوقت الحالي. يرجى المحاولة مرة أخرى في وقت لاحق أو الاتصال بأحد الموظفين."
+  },
+  "label": {
+    "contactName": "الاسم:",
+    "email": "عنوان البريد الإلكتروني:"
+  },
+  "langSwitch": "تغيير اللغة",
+  "moreActions": "المزيد من الأسئلة والإجراءات",
+  "page": "الصفحة",
+  "readLess": "عرض أقل",
+  "readMore": "اعرض المزيد",
+  "recording": "تسجيل",
+  "recordingInProgress": "جاري التسجيل...",
+  "relatedQuestions": "أسئلة ذات صلة",
+  "screenReader": {
+    "clearAction": "حذف المدخلات",
+    "closeAction": "إغلاق روبوت المحادثة",
+    "closeModalAction": "إغلاق الحوار",
+    "closeToggleMessageAction": "إغلاق معلومات روبوت المحادثة",
+    "copyAction": "نسخ الرد",
+    "deleteRecordingAction": "حذف التسجيل",
+    "error": {
+      "generic": "حدث خطأ."
+    },
+    "label": {
+      "chatbotInput": "رسالة روبوت المحادثة",
+      "history": "رسائل المحادثة"
+    },
+    "menuAction": "فتح القائمة",
+    "messageFooter": "تذييل الرسالة",
+    "messageSection": "الرسالة",
+    "messageWelcome": "رسالة ترحيب",
+    "openAction": "تحميل روبوت المحادثة",
+    "openImageInNewTab": "فتح الصورة في علامة تبويب جديدة",
+    "pauseAction": "إيقاف مؤقت لتشغيل الرد",
+    "playAction": "تشغيل الرد",
+    "rateNegativeAction": "تقييم المحادثة بشكل سلبي",
+    "ratePositiveAction": "تقييم المحادثة بشكل إيجابي",
+    "repeatPrompt": "تكرار الاستفسار",
+    "sendAction": "إرسال رسالة",
+    "startRecordingAction": "بدء التسجيل",
+    "stopAction": "إيقاف تشغيل الرد",
+    "stopRecordingAction": "إيقاف التسجيل"
+  },
+  "sendPlaceholder": "رسالة جديدة",
+  "sources": "يمكنك العثور على مزيد من المعلومات هنا:",
+  "textSize": "حجم النص"
+}

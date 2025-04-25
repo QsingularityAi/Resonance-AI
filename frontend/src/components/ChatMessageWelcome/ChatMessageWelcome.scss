@@ -1,0 +1,253 @@
+.welcome-message {
+  padding: 0 0.5rem;
+  font-size: 0.875em;
+  line-height: 1.4em;
+  container-type: inline-size;
+
+  &--variant-default &__inner,
+  &--variant-glass &__inner {
+    --welcome-background-color: none;
+    --primary-color10: none;
+
+    padding: 0.625rem 3rem;
+
+    h1, :deep(h1),
+    h2, :deep(h2),
+    h3, :deep(h3) {
+      color: var(--primary-color);
+      text-align: center;
+    }
+
+    p, :deep(p) {
+      font-size: 0.75rem;
+    }
+
+    .welcome-message__header {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__inner {
+    background: var(--welcome-background-color);
+    border-radius: 1rem;
+    padding: 0.625rem 1rem;
+    max-width: 896px;
+    width: 100%;
+    margin: auto;
+  }
+
+  &__read-more {
+    overflow: hidden;
+  }
+
+  &__header {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 4fr 1fr;
+  }
+}
+
+.collapsed {
+  max-height: 255px;
+  transition: max-height 0.3s ease-out;
+}
+
+.expanded {
+  max-height: 10000px;
+  transition: max-height 0.4s ease-out;
+}
+
+.welcome-message {
+  h1, :deep(h1),
+  h2, :deep(h2) {
+    color: var(--primary-color);
+  }
+}
+
+.read-more-btn {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  background-color: var(--primary-color10);
+  width: 100%;
+  justify-content: center;
+  gap: 8px;
+  height: 28px;
+  margin-top: 8px;
+  padding: 4px 0;
+  font-size: 0.875em;
+
+  &:focus {
+    outline-offset: -3px;
+  }
+
+  &::before {
+    position: absolute;
+    content: "";
+    bottom: 100%;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background: var(--primary-color10);
+    background: linear-gradient(
+                    0deg,
+                    var(--primary-color10) 0%,
+                    var(--primary-color10) 10%,
+                    transparent 100%
+    );
+    transition: height 0.4s ease-out;
+  }
+
+  &.expanded {
+    &::before {
+      height: 0;
+      transition: height 0.2s ease-out;
+    }
+
+    .chevron {
+      transform: rotate(-180deg);
+      transition: transform 0.2s ease-out;
+    }
+  }
+
+  .chevron {
+    transform: rotate(0deg);
+    transition: transform 0.2s ease-out;
+  }
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: max-height 0.5s ease-in-out,
+  opacity 0.5s ease-in-out;
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  max-height: 0;
+  opacity: 0;
+}
+
+:deep(ul),
+:deep(ol) {
+  padding-inline-start: 24px;
+  margin: 8px 0;
+}
+
+:deep(ul li),
+:deep(ol li) {
+  margin: 6px 0;
+}
+
+:deep(ul) {
+  list-style: disc;
+}
+
+:deep(ol) {
+  list-style: numeric;
+}
+
+:deep(p) {
+  margin-bottom: 10px;
+}
+
+:deep(hr) {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+:deep(tt),
+:deep(code),
+:deep(samp) {
+  font-family: ui-monospace,
+  SFMono-Regular,
+  SF Mono,
+  Menlo,
+  Consolas,
+  Liberation Mono,
+  monospace;
+  font-size: 85%;
+  padding: 0.2em 0.4em;
+  margin: 0;
+  white-space: break-spaces;
+  background-color: #e8e8e8;
+  border-radius: 6px;
+}
+
+:deep(blockquote) {
+  padding: 0 1em;
+  border-left: 0.25em solid #e8e8e8;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+  unicode-bidi: isolate;
+}
+
+:deep(pre) {
+  display: block;
+  font-family: monospace;
+  unicode-bidi: isolate;
+  white-space: pre;
+  margin: 1em 0px;
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #e8e8e8;
+  border-radius: 6px;
+}
+
+@container (min-width: 490px) {
+  .welcome-message {
+    padding: 0 2rem;
+  }
+
+  .welcome-message__inner {
+    padding: 2.25rem 2rem 1rem 2rem;
+  }
+}
+
+@container (min-width: 750px) {
+  .collapsed {
+    max-height: unset;
+  }
+
+  .expanded {
+    max-height: unset;
+  }
+
+  .read-more-btn {
+    display: none;
+  }
+}
+
+.chat-window--high-contrast {
+  .welcome-message {
+    h1, :deep(h1),
+    h2, :deep(h2) {
+      color: var(--high-contrast-on-light-text-color);
+    }
+
+    &--variant-default,
+    &--variant-glass {
+      .welcome-message__inner {
+        h1, :deep(h1),
+        h2, :deep(h2),
+        h3, :deep(h3) {
+          color: var(--high-contrast-on-light-text-color);
+        }
+      }
+    }
+  }
+
+
+}

@@ -1,0 +1,66 @@
+{
+  "chatDisplay": "Sohbet görüntüleme",
+  "chatRating": "Sohbeti değerlendirin:",
+  "chatReset": "Sohbeti sıfırla",
+  "contact": {
+    "buttonLabel": "Bir çalışanla iletişime geçin",
+    "contactPerson": {
+      "content": "İçerik için irtibat kişisi",
+      "technical": "Teknik irtibat kişisi"
+    },
+    "intro": "Bir çalışanla iletişime geçmek istiyorsunuz{sign} İçerikle ilgili veya teknik sorularınız varsa lütfen ilgili irtibat kişisiyle iletişime geçin."
+  },
+  "contactSupport": "Bir çalışanla iletişime geçmek ister misiniz?",
+  "contrast": "Yüksek kontrast",
+  "copySourceCodeAction": "Kaynak kodu kopyalama",
+  "copySourceCodeActionIconAltText": "Kaynak kodu kopyala simgesi",
+  "error": {
+    "generic": "Bir hata oluştu.",
+    "network": "Sorunuza şu anda yanıt verilemiyor. Lütfen daha sonra tekrar deneyin veya bir personelle iletişime geçin."
+  },
+  "label": {
+    "contactName": "İsim:",
+    "email": "E-posta Adresi:"
+  },
+  "langSwitch": "Dil değiştir",
+  "moreActions": "daha fazla soru ve eylem",
+  "page": "Sayfa",
+  "readLess": "Daha az göster",
+  "readMore": "Daha fazla göster",
+  "recording": "Kayıt",
+  "recordingInProgress": "Kayıt devam ediyor...",
+  "relatedQuestions": "İlgili sorular",
+  "screenReader": {
+    "clearAction": "Girişi sil",
+    "closeAction": "Chatbot'u kapat",
+    "closeModalAction": "Yakın diyalog",
+    "closeToggleMessageAction": "Chatbot bilgisini kapat",
+    "copyAction": "Yanıtı kopyala",
+    "deleteRecordingAction": "Kaydı sil",
+    "error": {
+      "generic": "Bir hata oluştu."
+    },
+    "label": {
+      "chatbotInput": "Chatbot mesajı",
+      "history": "Sohbet mesajları"
+    },
+    "menuAction": "Menüyü aç",
+    "messageFooter": "Mesaj altbilgisi",
+    "messageSection": "Mesaj",
+    "messageWelcome": "Hoş geldiniz mesajı",
+    "openAction": "Chatbot'u yükle",
+    "openImageInNewTab": "Resmi yeni sekmede aç",
+    "pauseAction": "Yanıtı oynatmayı duraklat",
+    "playAction": "Yanıtı oynat",
+    "rateNegativeAction": "Sohbeti olumsuz değerlendir",
+    "ratePositiveAction": "Sohbeti olumlu değerlendir",
+    "repeatPrompt": "Sorgu tekrarı",
+    "sendAction": "Mesaj gönder",
+    "startRecordingAction": "Kayıt başlat",
+    "stopAction": "Yanıtı oynatmayı durdur",
+    "stopRecordingAction": "Kaydı durdur"
+  },
+  "sendPlaceholder": "Yeni mesaj",
+  "sources": "Daha fazla bilgiyi burada bulabilirsiniz:",
+  "textSize": "Metin boyutu"
+}

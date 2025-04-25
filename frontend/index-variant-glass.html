@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vite App</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <style>
+      html, body {
+          padding: 0;
+          margin: 0;
+          font-family: "Montserrat";
+      }
+
+      header {
+          height: 100px;
+          background-color: #A6CDC6;
+      }
+
+      footer {
+          height: 120px;
+          background-color: #16404D;
+      }
+
+      .content {
+          min-height: 1200px;
+          background-color: #DDA853;
+          display: grid;
+          grid-gap: 40px;
+      }
+
+      .container {
+          width: 100%;
+          max-width: 900px;
+          margin: auto;
+          background-color: #FBF5DD;
+          min-height: 300px;
+      }
+  </style>
+</head>
+<body>
+<main>
+  <a href="/index.html" style="display: inline-block; padding: 10px 12px; background: beige;">index</a>
+  <a href="/index-fullscreen.html" style="display: inline-block; padding: 10px 12px; background: beige;">fullscreen</a>
+
+  <header>
+    HEADER
+  </header>
+  <div class="content">
+    CONTENT
+    <div class="container">
+      #1
+    </div>
+    <div class="container">
+      #2
+      <div id="myElement"></div>
+    </div>
+    <div class="container">
+      #3
+    </div>
+    <div class="container">
+      #4
+    </div>
+    <div class="container">
+      #5
+    </div>
+
+  </div>
+  <footer>
+    FOOTER
+  </footer>
+
+</main>
+
+<script id="hw-chatbot-widget"
+        type="module"
+        src="/src/main.ts"
+        data-toggle-color="#f770e8"
+        data-toggle-text-de="Hallo, ich bin dein KI-Assistent. Für Fragen des Vereinslebens stehe ich zur Verfügung."
+        data-toggle-text-en="Hello, I'm your AI assistant. I am available for questions about club life."
+        data-chatbot-id="2ce94588-c9a0-413a-ab12-6920920c5064"
+        data-api-url="http://backend-hw-chatbot.localhost/api"
+></script>
+</body>
+</html>

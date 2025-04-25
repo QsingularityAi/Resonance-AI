@@ -1,0 +1,140 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls static %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'crawler/css/widgets.css' %}">
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <!-- JavaScript-Dateien werden bereits durch die Media-Klasse der Widgets eingebunden -->
+{% endblock %}
+
+{% block submit_buttons_bottom %}
+    {{ block.super }}
+    <div class="submit-row" style="margin-top: 20px;">
+        <input type="button"
+               value="{% if original.crawling_status == 'started' %}Stop Crawling{% else %}Start Crawling{% endif %}"
+               class="{% if original.crawling_status == 'started' %}deletelink{% else %}default{% endif %}"
+               id="crawlButton"
+               data-status="{{ original.crawling_status }}"
+               style="margin-right: 8px;">
+    </div>
+
+<style>
+    .submit-row input[type="button"] {
+        height: 35px;
+        line-height: 15px;
+        padding: 10px 15px;
+        border-radius: 4px;
+        color: #000;
+        border: 1px solid #ccc;  /* Added border */
+        cursor: pointer;
+        float: right;
+        display: inline-block;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);  /* Optional: adds subtle shadow */
+    }
+
+    .submit-row input[type="button"]:hover {
+        opacity: 0.8;
+    }
+
+    .submit-row input[type="button"].deletelink {
+        background: var(--delete-button-bg, #ba2121);
+        color: #000;
+        border: 1px solid #a41515;  /* Darker border for delete button */
+    }
+
+    .submit-row input[type="button"].default {
+        background: var(--button-bg, #79aec8);
+        color: #000;
+        border: 1px solid #5b8ba8;  /* Darker border for default button */
+    }
+
+    .submit-row input[type="button"]:disabled {
+        background: #ccc !important;
+        cursor: not-allowed;
+        opacity: 0.7;
+        border: 1px solid #b5b5b5;  /* Border for disabled state */
+    }
+</style>
+
+    <script>
+        const button = document.getElementById('crawlButton');
+
+        console.log('Current status from database:', '{{ original.crawling_status }}');
+        console.log('Button data-status:', button.dataset.status);
+
+        function updateButtonState(status) {
+            button.dataset.status = status;
+
+            switch(status.toLowerCase()) {
+                case 'started':
+                    button.value = 'Stop Crawling';
+                    button.classList.remove('default');
+                    button.classList.add('deletelink');
+                    button.style.background = 'var(--delete-button-bg)';
+                    button.disabled = false;
+                    break;
+
+                case 'stopping':
+                    button.value = 'Stopping...';
+                    button.disabled = true;
+                    button.style.background = '#ccc';
+                    break;
+
+                case 'pending':
+                    button.value = 'Start Crawling';
+                    button.classList.remove('deletelink');
+                    button.classList.add('default');
+                    button.style.background = 'var(--button-bg)';
+                    button.disabled = false;
+                    break;
+
+                default:
+                    console.warn('Unknown status:', status);
+            }
+        }
+
+        button.addEventListener('click', function() {
+            const status = button.dataset.status.toLowerCase();
+            const objectId = window.location.pathname.split('/')[4];
+            const endpoint = status === 'started' ? 'stop' : 'start';
+
+            // Create the URL based on the endpoint
+            const url = `/api/crawler/${objectId}/${endpoint}/`;
+
+            if (confirm(`Are you sure you want to ${endpoint} crawling?`)) {
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (endpoint === 'stop') {
+                        // Handle stop response
+                        if (data.status === 'success') {
+                            updateButtonState('stopping');
+                        }
+                    } else {
+                        // Handle start response
+                        if (data.status.includes('Crawl started')) {
+                            updateButtonState('started');
+                            window.location.reload();
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error: ' + error);
+                });
+            }
+        });
+
+        // Initialize button state
+        updateButtonState('{{ original.crawling_status }}');
+    </script>
+{% endblock %}

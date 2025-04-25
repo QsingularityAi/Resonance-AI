@@ -1,0 +1,7 @@
+{% block matomo_image_graph %}
+<img
+  class="img-fluid mx-auto d-block"
+  src="{% url 'stats' path='index.php' %}?{{ api }}"
+  alt="{{ alternative }}"
+/>
+{% endblock %}

@@ -1,0 +1,12 @@
+.audio-player {
+  background-color: var(--primary-color10);
+  width: 100%;
+  min-width: 200px;
+  height: auto;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  padding-right: 12px;
+}

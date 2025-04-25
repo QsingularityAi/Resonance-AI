@@ -1,0 +1,214 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls static admin_modify %}
+
+{% block content %}
+<div id="content-main">
+    <form method="post" id="field-mappings-form" novalidate>
+        {% csrf_token %}
+        
+        <div class="form-row">
+            <h2>{% trans "Field Mappings Configuration" %}</h2>
+            <p class="help">
+                {% trans "Configure how fields from the GraphQL response are converted to markdown. This allows for customizing the output based on the specific structure of the API." %}
+            </p>
+        </div>
+        
+        <fieldset class="module aligned">
+            <h2>{% trans "Basic Configuration" %}</h2>
+            
+            <div class="form-row field-static_url">
+                <div>
+                    <label for="id_static_url">{{ form.static_url.label }}:</label>
+                    {{ form.static_url }}
+                    {% if form.static_url.help_text %}
+                        <div class="help">{{ form.static_url.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="form-row field-title_field">
+                <div>
+                    <label for="id_title_field">{{ form.title_field.label }}:</label>
+                    {{ form.title_field }}
+                    {% if form.title_field.help_text %}
+                        <div class="help">{{ form.title_field.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="form-row field-date_format">
+                <div>
+                    <label for="id_date_format">{{ form.date_format.label }}:</label>
+                    {{ form.date_format }}
+                    {% if form.date_format.help_text %}
+                        <div class="help">{{ form.date_format.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="form-row field-unwrap_node_field">
+                <div>
+                    <label for="id_unwrap_node_field">{{ form.unwrap_node_field.label }}:</label>
+                    {{ form.unwrap_node_field }}
+                    {% if form.unwrap_node_field.help_text %}
+                        <div class="help">{{ form.unwrap_node_field.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset class="module aligned">
+            <h2>{% trans "Image Links" %}</h2>
+            
+            <div class="form-row field-image_links_path_field">
+                <div>
+                    <label for="id_image_links_path_field">{{ form.image_links_path_field.label }}:</label>
+                    {{ form.image_links_path_field }}
+                    {% if form.image_links_path_field.help_text %}
+                        <div class="help">{{ form.image_links_path_field.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="form-row field-image_links_alt_field">
+                <div>
+                    <label for="id_image_links_alt_field">{{ form.image_links_alt_field.label }}:</label>
+                    {{ form.image_links_alt_field }}
+                    {% if form.image_links_alt_field.help_text %}
+                        <div class="help">{{ form.image_links_alt_field.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset class="module aligned">
+            <h2>{% trans "Document Links" %}</h2>
+            
+            <div class="form-row field-document_links_path_field">
+                <div>
+                    <label for="id_document_links_path_field">{{ form.document_links_path_field.label }}:</label>
+                    {{ form.document_links_path_field }}
+                    {% if form.document_links_path_field.help_text %}
+                        <div class="help">{{ form.document_links_path_field.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="form-row field-document_links_label_field">
+                <div>
+                    <label for="id_document_links_label_field">{{ form.document_links_label_field.label }}:</label>
+                    {{ form.document_links_label_field }}
+                    {% if form.document_links_label_field.help_text %}
+                        <div class="help">{{ form.document_links_label_field.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset class="module aligned">
+            <h2>{% trans "Field Lists" %}</h2>
+            
+            <div class="form-row field-image_fields">
+                <div>
+                    <label for="id_image_fields">{{ form.image_fields.label }}:</label>
+                    {{ form.image_fields }}
+                    {% if form.image_fields.help_text %}
+                        <div class="help">{{ form.image_fields.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="form-row field-video_fields">
+                <div>
+                    <label for="id_video_fields">{{ form.video_fields.label }}:</label>
+                    {{ form.video_fields }}
+                    {% if form.video_fields.help_text %}
+                        <div class="help">{{ form.video_fields.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="form-row field-date_fields">
+                <div>
+                    <label for="id_date_fields">{{ form.date_fields.label }}:</label>
+                    {{ form.date_fields }}
+                    {% if form.date_fields.help_text %}
+                        <div class="help">{{ form.date_fields.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="form-row field-ignore_fields">
+                <div>
+                    <label for="id_ignore_fields">{{ form.ignore_fields.label }}:</label>
+                    {{ form.ignore_fields }}
+                    {% if form.ignore_fields.help_text %}
+                        <div class="help">{{ form.ignore_fields.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset class="module aligned">
+            <h2>{% trans "Link Fields" %}</h2>
+            
+            <div class="form-row field-link_fields">
+                <div>
+                    <label for="id_link_fields">{{ form.link_fields.label }}:</label>
+                    {{ form.link_fields }}
+                    {% if form.link_fields.help_text %}
+                        <div class="help">{{ form.link_fields.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset class="module aligned">
+            <h2>{% trans "Multi-Image Arrays" %}</h2>
+            
+            <div class="form-row field-multi_image_arrays">
+                <div>
+                    <label for="id_multi_image_arrays">{{ form.multi_image_arrays.label }}:</label>
+                    {{ form.multi_image_arrays }}
+                    {% if form.multi_image_arrays.help_text %}
+                        <div class="help">{{ form.multi_image_arrays.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset class="module aligned">
+            <h2>{% trans "Extract Fields" %}</h2>
+            
+            <div class="form-row field-extract_fields">
+                <div>
+                    <label for="id_extract_fields">{{ form.extract_fields.label }}:</label>
+                    {{ form.extract_fields }}
+                    {% if form.extract_fields.help_text %}
+                        <div class="help">{{ form.extract_fields.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset class="module aligned">
+            <h2>{% trans "Custom Formatters" %}</h2>
+            
+            <div class="form-row field-custom_formatters">
+                <div>
+                    <label for="id_custom_formatters">{{ form.custom_formatters.label }}:</label>
+                    {{ form.custom_formatters }}
+                    {% if form.custom_formatters.help_text %}
+                        <div class="help">{{ form.custom_formatters.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </fieldset>
+        
+        <div class="submit-row">
+            <input type="submit" value="{% trans 'Save' %}" class="default" name="_save">
+            <a href="{% url 'admin:graphql_graphqlresource_change' resource.pk %}" class="button">{% trans "Cancel" %}</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

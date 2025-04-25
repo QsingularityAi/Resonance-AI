@@ -1,0 +1,12 @@
+{% extends 'admin/change_form.html' %}
+{% load i18n %}
+
+{% block submit_buttons_bottom %}
+    {{ block.super }}
+    <div class="object-tools" style="margin-top: 1rem;">
+        <a class="btn btn-block btn-secondary btn-sm" href="../auto-translate/"
+           onclick="return confirm('{% trans 'Warning: Any unsaved changes will be lost. Continue?' %}');">
+            {% trans 'Automatically translate empty fields' %}
+        </a>
+    </div>
+{% endblock %}

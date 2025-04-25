@@ -1,0 +1,23 @@
+{% block related_questions %}
+Aktuelles Jahr: {{ current_year }}, nächstes Jahr: {{ next_year }}
+{% if prompt_extras %}
+{{ prompt_extras }}
+{% endif %}
+Generiere kontextrelevante Folgefragen zu einem gegebenen Text.
+
+Analyseschritte:
+1. Identifiziere Hauptthemen und Schlüsselkonzepte
+2. Prüfe auf offene Punkte oder unvollständige Informationen
+3. Suche nach Zusammenhängen und Implikationen
+
+Kriterien für Folgefragen:
+- Muss direkt mit dem Ausgangstext zusammenhängen
+- Sollte neue, relevante Aspekte erschließen
+- Darf keine bereits beantworteten Punkte wiederholen
+- Muss kurz und verständlich formuliert sein
+
+Output:
+- Maximal 3 Folgefragen
+- Priorisierung nach Relevanz
+- Muss in der Sprache des ursprünglichen Textes sein
+{% endblock %}

@@ -1,0 +1,80 @@
+name: hw-chatbot-prod
+
+x-backend-base-depends-on: &backend-base-depends-on
+  rabbitmq:
+    condition: service_healthy
+  db:
+    condition: service_healthy
+  qdrant:
+    condition: service_healthy
+  matomo:
+    condition: service_healthy
+
+services:
+  frontend-js:
+    profiles: ["do-not-start"]
+  frontend-build:
+    profiles: [ "do-not-start" ]
+
+  backend:
+    build: !reset null
+    image: ${APP_IMAGE}
+    volumes: !override
+      - django-media:/app/media:rw
+      - ./.env:/app/.env
+    pull_policy: always
+    depends_on: !reset
+      <<: *backend-base-depends-on
+    command: >
+      sh -c "python manage.py migrate &&
+             gunicorn --bind 0.0.0.0:8000 --timeout 70 --workers 8 backend.wsgi:application"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.hw-chatbot.rule: "${TRAEFIK_RULE:-Host(`${CHATBOT_HOST}`)}"
+      traefik.http.routers.hw-chatbot.entrypoints: "websecure"
+      traefik.http.routers.hw-chatbot.tls: "true"
+      traefik.http.routers.hw-chatbot.tls.certresolver: "letsencrypt"
+      traefik.http.services.hw-chatbot.loadbalancer.server.port: "8000"
+
+  worker-main:
+    build: !reset null
+    pull_policy: always
+    image: ${APP_IMAGE}
+    depends_on: !reset
+      <<: *backend-base-depends-on
+    profiles: !reset []
+    volumes: !override
+      - django-media:/app/media:rw
+      - ./.env:/app/.env
+
+  worker-rag:
+    build: !reset null
+    pull_policy: always
+    image: ${APP_IMAGE}
+    depends_on: !reset
+      <<: *backend-base-depends-on
+    profiles: !reset []
+    deploy:
+      replicas: 2
+    volumes: !override
+      - rag-cache:/app/rag_cache:rw
+      - django-media:/app/media:rw
+      - ./.env:/app/.env
+
+  worker-crawler:
+    build: !reset null
+    pull_policy: always
+    image: ${APP_IMAGE}
+    depends_on: !reset
+      <<: *backend-base-depends-on
+    profiles: !reset []
+    volumes: !override
+      - django-media:/app/media:rw
+      - ./.env:/app/.env
+
+  mongodb:
+    profiles: !reset []
+
+volumes:
+  django-media:
+  rag-cache:

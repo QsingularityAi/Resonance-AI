@@ -1,0 +1,25 @@
+services:
+# # bind ports as needed:
+#  db:
+#    ports:
+#      - 127.0.0.1:33433:3306
+#  qdrant:
+#    ports:
+#      - 127.0.0.1:6333:6333
+#      - 127.0.0.1:6334:6334
+#  mongodb:
+#    ports:
+#      - 127.0.0.1:27017:27017
+#  rabbitmq:
+#    ports:
+#      - 127.0.0.1:5672:5672
+#      - 127.0.0.1:15676:15672
+
+# # disable workers as needed
+
+#  worker-crawler:
+#    profiles:
+#      - 'do-not-start'
+#  worker-rag:
+#    profiles:
+#      - 'do-not-start'

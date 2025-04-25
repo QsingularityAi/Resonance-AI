@@ -1,0 +1,66 @@
+{
+  "chatDisplay": "Chat display",
+  "chatRating": "Rate the chat:",
+  "chatReset": "Reset chat",
+  "contact": {
+    "buttonLabel": "Contact an employee",
+    "contactPerson": {
+      "content": "Contact person for content",
+      "technical": "Technical contact person"
+    },
+    "intro": "You would like to contact an employee{sign} Please get in touch with the relevant contact person if you have any content-related or technical questions."
+  },
+  "contactSupport": "Would you like to contact an employee?",
+  "contrast": "High contrast",
+  "copySourceCodeAction": "Copy source code",
+  "copySourceCodeActionIconAltText": "Copy source code icon",
+  "error": {
+    "generic": "An error has occurred.",
+    "network": "Your enquiry cannot be answered at the moment. Please try again later or contact a member of staff."
+  },
+  "label": {
+    "contactName": "Name:",
+    "email": "E-Mail-Address:"
+  },
+  "langSwitch": "Change language",
+  "moreActions": "more questions and actions",
+  "page": "Page",
+  "readLess": "Show less",
+  "readMore": "Show more",
+  "recording": "Recording",
+  "recordingInProgress": "Recording in progress...",
+  "relatedQuestions": "Related questions",
+  "screenReader": {
+    "clearAction": "Delete input",
+    "closeAction": "Close chatbot",
+    "closeModalAction": "Close dialogue",
+    "closeToggleMessageAction": "Close chatbot information",
+    "copyAction": "Copy response",
+    "deleteRecordingAction": "Discard recording",
+    "error": {
+      "generic": "An error has occurred."
+    },
+    "label": {
+      "chatbotInput": "Chatbot message",
+      "history": "Chat messages"
+    },
+    "menuAction": "Open menu",
+    "messageFooter": "Message footer",
+    "messageSection": "Message",
+    "messageWelcome": "Welcome message",
+    "openAction": "Load chatbot",
+    "openImageInNewTab": "Open image in new tab",
+    "pauseAction": "Pause playing response",
+    "playAction": "Play response",
+    "rateNegativeAction": "Rate chat negatively",
+    "ratePositiveAction": "Rate chat positively",
+    "repeatPrompt": "Repeat request",
+    "sendAction": "Send message",
+    "startRecordingAction": "Start recording",
+    "stopAction": "Stop playing response",
+    "stopRecordingAction": "Stop recording"
+  },
+  "sendPlaceholder": "New message",
+  "sources": "You can find more information here:",
+  "textSize": "Text size"
+}

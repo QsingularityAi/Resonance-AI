@@ -1,0 +1,4 @@
+# add new rag requirements here
+crawl4ai==0.4.248
+
+# add new gpu requirements here

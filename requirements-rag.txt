@@ -1,0 +1,11 @@
+langchain-core>=0.3.21
+langchain>=0.3.9
+markdown==3.7
+pypdf==5.1.0
+crawl4ai==0.3.731
+numpy==1.26.4
+tokenizers==0.19.1
+scrapy~=2.11.2
+--extra-index-url https://wheels.myhloli.com
+magic-pdf[full]==0.10.5
+huggingface_hub

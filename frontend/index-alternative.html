@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vite App</title>
+
+  <style>
+      html, body {
+          padding: 0;
+          margin: 0;
+      }
+
+      header {
+          height: 100px;
+          background-color: #A6CDC6;
+      }
+
+      footer {
+          height: 120px;
+          background-color: #16404D;
+      }
+
+      .content {
+          min-height: 1200px;
+          background-color: #DDA853;
+          display: grid;
+          grid-gap: 40px;
+      }
+
+      .container {
+          width: 100%;
+          max-width: 900px;
+          margin: auto;
+          background-color: #FBF5DD;
+          min-height: 300px;
+      }
+
+      hw-chatbot-toggle {
+          --background-color: red;
+      }
+  </style>
+</head>
+<body>
+<main>
+  <a href="/index-fullscreen.html" style="display: inline-block; padding: 10px 12px; background: beige;">fullscreen</a>
+  <a href="/index-variant-glass.html" style="display: inline-block; padding: 10px 12px; background: beige;">glass</a>
+
+  <header>
+    HEADER
+  </header>
+  <div class="content">
+    CONTENT
+    <div class="container">
+      #1
+    </div>
+    <div class="container">
+      #2
+      <div id="myElement"></div>
+    </div>
+    <div class="container">
+      #3
+    </div>
+    <div class="container">
+      #4
+    </div>
+    <div class="container">
+      #5
+    </div>
+
+  </div>
+  <footer>
+    FOOTER
+  </footer>
+
+</main>
+
+<script type="module">
+  import {init} from "/src/main.ts"
+
+  init(
+    "cd2ed281-42ac-4a70-9b55-4c778f922938",
+    "http://backend-hw-chatbot.localhost/api/",
+    "Hello, I'm your AI assistant. I am available for questions about club life.",
+    "Hallo, ich bin dein KI-Assistent. Für Fragen des Vereinslebens stehe ich zur Verfügung.",
+    false,
+  )
+</script>
+</body>
+</html>

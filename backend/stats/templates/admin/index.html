@@ -1,0 +1,89 @@
+{% extends "admin/index.html" %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="m-0">Interaktionen</h5>
+      </div>
+      <div class="card-body">
+      {% include "../matomo_image_graph.html" with alternative="Interaktionen" api="module=API&method=ImageGraph.get&apiModule=VisitsSummary&apiAction=get&period=day&date=last30&width=800&height=250" %}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="m-0">Interaktionen</h5>
+          </div>
+          <div class="card-body">
+            {% include "../matomo_iframe.html" with height="120px" api="moduleToWidgetize=CoreVisualizations&actionToWidgetize=singleMetricView&period=day&date=today" %}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="m-0">Dauer</h5>
+          </div>
+
+          <div class="card-body">
+            {% include "../matomo_iframe.html" with height="120px" api="moduleToWidgetize=CoreVisualizations&actionToWidgetize=singleMetricView&period=day&date=today&column=avg_time_on_site" %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-3 col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="m-0">Jetzt</h5>
+      </div>
+      <div class="card-body">
+          {% include "../matomo_iframe.html" with height="500px" api="moduleToWidgetize=Live&actionToWidgetize=getSimpleLastVisitCount&period=day&date=today" %}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-3 col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="m-0">Like</h5>
+      </div>
+      <div class="card-body">
+          {% include "../matomo_iframe.html" with height="120px" api="moduleToWidgetize=CoreVisualizations&actionToWidgetize=singleMetricView&period=day&date=today&column=nb_conversions&idGoal=2" %}
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h5 class="m-0">Dislike</h5>
+      </div>
+      <div class="card-body">
+          {% include "../matomo_iframe.html" with height="120px" api="moduleToWidgetize=CoreVisualizations&actionToWidgetize=singleMetricView&period=day&date=today&column=nb_conversions&idGoal=3" %}
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h5 class="m-0">Nachrichten</h5>
+      </div>
+      <div class="card-body">
+                  {% include "../matomo_iframe.html" with height="120px" api="moduleToWidgetize=CoreVisualizations&actionToWidgetize=singleMetricView&period=day&date=today&column=nb_conversions&idGoal=1" %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  {% include "../matomo_iframe_loading_indicator.html" %}
+  {{ block.super }}
+
+{% endblock %}

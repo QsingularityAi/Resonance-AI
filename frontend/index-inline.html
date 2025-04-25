@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vite App</title>
+
+  <style>
+      header {
+          height: 100px;
+          background-color: #A6CDC6;
+      }
+
+      footer {
+          height: 120px;
+          background-color: #16404D;
+      }
+
+      .content {
+          min-height: 1200px;
+          background-color: #DDA853;
+      }
+
+      .container {
+          max-width: 900px;
+          margin: 32px auto;
+          background-color: #FBF5DD;
+          min-height: 300px;
+      }
+
+      .container--inline {
+          height: 400px;
+      }
+  </style>
+</head>
+<body>
+<main>
+  <a href="/index-fullscreen.html" style="display: inline-block; padding: 10px 12px; background: beige;">fullscreen</a>
+
+  <header>
+    HEADER
+  </header>
+  <div class="content">
+    CONTENT
+    <div class="container">
+      #1
+    </div>
+    <div class="container ">
+      #2
+      <div style="height: 500px; width: 100%" id="myElement"></div>
+    </div>
+    <div class="container">
+      #3
+    </div>
+    <div class="container">
+      #4
+    </div>
+    <div class="container">
+      #5
+    </div>
+
+  </div>
+  <footer>
+    FOOTER
+  </footer>
+
+</main>
+
+<script id="hw-chatbot-widget"
+        type="module"
+        src="/src/main.ts"
+        data-toggle-color="#f770e8"
+        data-toggle-text-de="Hallo, ich bin dein KI-Assistent. Für Fragen des Vereinslebens stehe ich zur Verfügung."
+        data-toggle-text-en="Hello, I'm your AI assistant. I am available for questions about club life."
+        data-chatbot-id="7912181a-dc70-4097-b676-e4a3eb5c7c4b"
+        data-api-url="http://backend-hw-chatbot.localhost/api"
+        data-element-id="myElement"
+></script>
+
+</body>
+</html>

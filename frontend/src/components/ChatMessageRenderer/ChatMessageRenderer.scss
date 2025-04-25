@@ -1,0 +1,41 @@
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.char-appear-enter-active,
+.char-appear-leave-active {
+  transition: opacity 0.1s ease;
+}
+
+.char-appear-enter-from,
+.char-appear-leave-to {
+  opacity: 0;
+}
+
+.markdown-typer :deep(ul),
+.markdown-typer :deep(ol) {
+  margin: 8px 0;
+  padding-inline-start: 24px;
+  display: grid;
+  grid-gap: 8px;
+}
+
+.markdown-typer :deep(ul) {
+  list-style: disc;
+}
+
+.markdown-typer :deep(ol) {
+  list-style: decimal;
+}
+
+.markdown-typer :deep(p) {
+  margin-bottom: 12px;
+}
+
+.markdown-typer :deep(p:last-of-type) {
+  margin-bottom: 0;
+}

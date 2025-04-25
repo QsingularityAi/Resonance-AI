@@ -1,0 +1,304 @@
+name: hw-chatbot
+
+x-backend-base-depends-on: &backend-base-depends-on
+  rabbitmq:
+    condition: service_healthy
+  db:
+    condition: service_healthy
+  qdrant:
+    condition: service_healthy
+  matomo:
+    condition: service_healthy
+  redis:
+    condition: service_healthy
+
+x-backend-base: &backend-base
+  build:
+    context: .
+    target: base
+  #pull_policy: build # do not do that, as it kills pycharms ability to use the docker container as interpreter
+  restart: unless-stopped
+  env_file:
+    - path: ./.env
+      required: true
+  environment:
+    PYTHONPATH: /app
+
+  depends_on:
+    <<: *backend-base-depends-on
+  volumes:
+    - .:/app
+    - cache_paddleocr:/home/appuser/.paddleocr
+
+x-frontend-base: &frontend-base
+  image: node:20
+  user: ${UID:-1000}:${GID:-1000}
+  volumes:
+    - ./:/app
+  working_dir: /app
+
+services:
+  frontend-dev:
+    <<: *frontend-base
+    profiles:
+      - 'js'
+    environment:
+      HOST: 0.0.0.0
+    command: >
+      sh -c "npm ci && npm run dev"
+    expose:
+      - 5173
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5173"]
+
+
+  frontend-build:
+    <<: *frontend-base
+    command: >
+      sh -c "npm ci && npm run build"
+    restart: on-failure
+
+  backend:
+    <<: *backend-base
+    expose:
+      - 8000
+    depends_on:
+      # merge backend-base-depends-on plus specific ones!
+      <<: *backend-base-depends-on
+      frontend-build:
+        condition: service_completed_successfully
+    command: >
+      sh -c "python manage.py migrate &&
+             django-admin compilemessages && 
+             python manage.py runserver 0.0.0.0:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/ht/"]
+      interval: 5s    # Check every second (default is 30s)
+      start_period: 2s  # Wait 2s before first check
+      timeout: 3s     # Fail if check takes longer than 3s
+      retries: 10      # Try 5 times before marking unhealthy
+
+
+  # this worker is currently only used for rag. when we need one for non-rag tasks without the rag dependencies
+  # we should move crawl-start to another worker
+  worker-main:
+    <<: *backend-base
+    build:
+      context: .
+      target: rag
+    profiles: # change that later when the worker can run without the dependencies of the rag
+      - 'rag'
+      - 'gpu'
+    command: >
+      sh -c "celery -A backend worker -Q main --concurrency=1 -B --loglevel=info"
+
+  worker-crawler:
+    <<: *backend-base
+    build:
+      context: .
+      target: rag
+    profiles:
+      - 'rag'
+      - 'gpu'
+    command: >
+      sh -c "celery -A backend worker -Q crawler --concurrency=1 --loglevel=info"
+
+  worker-rag:
+    <<: *backend-base
+    build:
+      context: .
+      target: rag
+    profiles:
+      - 'rag'
+    command: >
+      sh -c "celery -A backend worker -Q rag --concurrency=1 --loglevel=info"
+
+  worker-rag-gpu:
+    <<: *backend-base
+    build:
+      context: .
+      target: gpu
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1 # alternatively, use `count: all` for all GPUs
+              capabilities: [ gpu ]
+    profiles:
+      - 'gpu'
+    command: >
+      sh -c "celery -A backend worker -Q rag --concurrency=1 --loglevel=info"
+
+  db:
+    image: bitnami/mysql:8.0.40-debian-12-r4
+    restart: unless-stopped
+    expose:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 345efbdfhd
+      MYSQL_DATABASE: backend
+      TZ: Europe/Berlin
+    volumes:
+      - mysql-data:/bitnami/mysql/data
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"status", "-h", "localhost", '-u', 'root', '-p345efbdfhd']
+      start_period: 2s
+      timeout: 20s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:4.0.4-management
+    hostname: rabbit
+    restart: unless-stopped
+    configs:
+      - source: rabbitmq_config
+        target: /etc/rabbitmq/rabbitmq.conf
+        uid: '999'  # Specify the user ID
+        gid: '999'  # Specify the group ID
+    labels:
+      - "traefik.http.services.rabbitmq-hwchatbot.loadbalancer.server.port=15672"
+    expose:
+      - 5672
+      - 15672
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      # use the flag --erlang-cookie if setting the erlang
+      # cookie was necessary (comment by red-riding-hood)
+      # test: rabbitmq-diagnostics -q ping --erlang-cookie "mycookie"
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+  mongodb:
+    image: mongo:8.0
+    profiles:
+      - 'rag'
+      - 'gpu'
+    restart: unless-stopped
+    expose:
+      - 8081
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: 23t41r344gh
+      MONGO_INITDB_DATABASE: rag
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  qdrant:
+    image: qdrant/qdrant:v1.12.3
+    restart: unless-stopped
+    expose:
+      - 6333
+      - 6334
+      - 6335
+    configs:
+      - source: qdrant_config
+        target: /qdrant/config/production.yaml
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/6333' || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 3
+
+  matomodb:
+    # https://hub.docker.com/r/bitnami/mariadb
+    image: docker.io/bitnami/mariadb:10.11
+    restart: unless-stopped
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=matomo
+      - MARIADB_DATABASE=matomo
+      # Flag necessary for the database max allowed packet check
+      # https://matomo.org/faq/troubleshooting/faq_183/
+      - MARIADB_EXTRA_FLAGS=--max_allowed_packet=64MB
+    volumes:
+      - "matomodb_data:/bitnami/mariadb"
+     # When the container is executed for the first time,
+     # it will execute the files with extensions .sh, .sql and .sql.gz located at /docker-entrypoint-initdb.d.
+      - "./matomo/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"status", "-h", "localhost"]
+      timeout: 20s
+      start_period: 2s
+      retries: 10
+
+  matomo:
+    # https://github.com/bitnami/containers/tree/main/bitnami/matomo
+    image: docker.io/bitnami/matomo:5
+    restart: unless-stopped
+    # must be root to enable matomo crons!
+    # see /etc/cron.d/matomo
+    user: root
+    environment:
+      - MATOMO_SKIP_BOOTSTRAP=yes
+      - MATOMO_PROXY_CLIENT_HEADER=HTTP_X_FORWARDED_FOR
+      - MATOMO_DATABASE_HOST=matomodb
+      - MATOMO_DATABASE_PORT_NUMBER=3306
+      - MATOMO_DATABASE_USER=matomo
+      - MATOMO_DATABASE_NAME=matomo
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MATOMO_USERNAME=chatbot
+      - MATOMO_PASSWORD=chatbot123
+      - MATOMO_WEBSITE_NAME=chatbot
+    volumes:
+      - "matomo_data:/bitnami/matomo"
+      - "./matomo/config.ini.php:/bitnami/matomo/config/config.ini.php"
+    depends_on:
+      matomodb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/matomo.php"]
+      timeout: 20s
+      start_period: 2s
+      retries: 10
+
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    command: redis-server --save "" --appendonly no
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+networks:
+  default:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  rabbitmq_data:
+  mongodb_data:
+  qdrant_data:
+  cache_paddleocr:
+  matomodb_data:
+  matomo_data:
+
+configs:
+  qdrant_config:
+    content: |
+      log_level: INFO
+  rabbitmq_config:
+    content: |
+      # Timeouts (in milliseconds)
+      consumer_timeout = 14400000  # 4 hours
+      
+      # Resource limits
+      heartbeat = 60

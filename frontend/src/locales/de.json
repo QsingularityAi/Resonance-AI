@@ -1,0 +1,66 @@
+{
+  "chatDisplay": "Chatdarstellung",
+  "chatRating": "Den Chat bewerten:",
+  "chatReset": "Chat zurücksetzen",
+  "contact": {
+    "buttonLabel": "Einen Mitarbeiter kontaktieren",
+    "contactPerson": {
+      "content": "Inhaltliche Ansprechperson",
+      "technical": "Technische Ansprechperson"
+    },
+    "intro": "Du möchtest einen Mitarbeiter kontaktieren{sign} Wende dich bei inhaltlichen oder technischen Fragen an die jeweilige Ansprechperson."
+  },
+  "contactSupport": "Möchtest du einen Mitarbeiter kontaktieren?",
+  "contrast": "Hoher Kontrast",
+  "copySourceCodeAction": "Quellcode kopieren",
+  "copySourceCodeActionIconAltText": "Quellcode kopieren Icon",
+  "error": {
+    "generic": "Es ist ein Fehler aufgetreten.",
+    "network": "Deine Anfrage kann aktuell nicht beantwortet werden. Bitte versuche es später noch einmal oder kontaktiere einen Mitarbeiter."
+  },
+  "label": {
+    "contactName": "Name:",
+    "email": "E-Mail:"
+  },
+  "langSwitch": "Sprache ändern",
+  "moreActions": "weitere Fragen und Aktionen",
+  "page": "Seite",
+  "readLess": "Weniger anzeigen",
+  "readMore": "Mehr anzeigen",
+  "recording": "Aufnahme",
+  "recordingInProgress": "Aufnahme läuft...",
+  "relatedQuestions": "Weiterführende Fragen",
+  "screenReader": {
+    "clearAction": "Eingabe löschen",
+    "closeAction": "Chatbot schließen",
+    "closeModalAction": "Dialog schließen",
+    "closeToggleMessageAction": "Chatbotinformation schließen",
+    "copyAction": "Antwort kopieren",
+    "deleteRecordingAction": "Aufnahme verwerfen",
+    "error": {
+      "generic": "Es ist ein Fehler aufgetreten."
+    },
+    "label": {
+      "chatbotInput": "Chatbotnachricht",
+      "history": "Chat Nachrichten"
+    },
+    "menuAction": "Menü öffnen",
+    "messageFooter": "Fußzeile der Nachricht",
+    "messageSection": "Nachricht",
+    "messageWelcome": "Willkommensnachricht",
+    "openAction": "Chatbot laden",
+    "openImageInNewTab": "Bild in neuem Tab öffnen",
+    "pauseAction": "Antwort abspielen pausieren",
+    "playAction": "Antwort abspielen",
+    "rateNegativeAction": "Chat negativ bewerten",
+    "ratePositiveAction": "Chat positiv bewerten",
+    "repeatPrompt": "Anfrage wiederholen",
+    "sendAction": "Nachricht senden",
+    "startRecordingAction": "Aufnahme starten",
+    "stopAction": "Antwort abspielen stoppen",
+    "stopRecordingAction": "Aufnahme stoppen"
+  },
+  "sendPlaceholder": "Neue Nachricht",
+  "sources": "Weiterführende Informationen findest du hier:",
+  "textSize": "Schriftgröße"
+}

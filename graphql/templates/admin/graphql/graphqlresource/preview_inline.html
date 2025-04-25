@@ -1,0 +1,292 @@
+{% load i18n %}
+
+<style>
+    .preview-container {
+        margin: 20px 0;
+    }
+    .preview-section {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 15px;
+    }
+    .preview-section h3 {
+        margin-top: 0;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+    .preview-content {
+        overflow: auto;
+        max-height: 400px;
+        background-color: #f8f8f8;
+        padding: 10px;
+        border-radius: 4px;
+    }
+    .code-block {
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        font-family: Consolas, Monaco, 'Andale Mono', monospace;
+        padding: 10px;
+        white-space: pre-wrap;
+        overflow-x: auto;
+    }
+    .url-template {
+        background-color: #f8fff8;
+        padding: 10px;
+        border: 1px solid #cce;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+    .placeholder {
+        background-color: #efe;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-weight: bold;
+    }
+    .error-message {
+        color: #c00;
+        background-color: #fee;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+    }
+    .success-message {
+        color: #080;
+        background-color: #efe;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+    }
+    .loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        font-style: italic;
+        color: #666;
+    }
+    .loading:after {
+        content: " ⟳";
+        animation: spin 2s linear infinite;
+        margin-left: 8px;
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    .preview-button {
+        margin-bottom: 20px;
+    }
+</style>
+
+<div id="graphql-preview-container">
+    <div class="preview-controls">
+        <div class="preview-button">
+            <button type="button" id="run-preview-button" class="button">{% trans "Run Preview" %}</button>
+            <span id="preview-status"></span>
+        </div>
+        
+        <div class="item-selector" style="margin-top: 10px; display: flex; align-items: center;">
+            <label for="item-index" style="margin-right: 10px;">{% trans "Item Index:" %}</label>
+            <input type="number" id="item-index" value="0" min="0" style="width: 60px; margin-right: 10px;">
+            
+            <button type="button" id="prev-item" class="button" style="margin-right: 5px;">&lt;</button>
+            <button type="button" id="next-item" class="button" style="margin-right: 15px;">&gt;</button>
+            
+            <span id="item-count" style="font-style: italic;"></span>
+        </div>
+    </div>
+    
+    <div id="preview-loading" class="loading" style="display: none;">
+        {% trans "Loading preview..." %}
+    </div>
+    
+    <div id="preview-error" class="error-message" style="display: none;"></div>
+    
+    <div id="preview-content" style="display: none;">
+        <!-- URL Template Preview -->
+        <div class="preview-section">
+            <h3>{% trans "URL Template Preview" %}</h3>
+            
+            <div id="url-template-section">
+                <p>{% trans "Template:" %}</p>
+                <div class="url-template" id="template-with-placeholders"></div>
+                
+                <p>{% trans "Processed URL:" %}</p>
+                <div class="preview-content">
+                    <a href="#" id="processed-url" target="_blank"></a>
+                </div>
+            </div>
+            
+            <div id="no-url-template-section" style="display: none;">
+                <p>{% trans "No URL template configured. Using the GraphQL resource URL:" %}</p>
+                <div class="preview-content">
+                    <a href="#" id="resource-url" target="_blank"></a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Markdown Preview -->
+        <div class="preview-section">
+            <h3>{% trans "Markdown Preview" %}</h3>
+            <div class="preview-content">
+                <pre class="code-block" id="markdown-content"></pre>
+            </div>
+        </div>
+        
+        <!-- Raw JSON Preview -->
+        <div class="preview-section">
+            <h3>{% trans "Raw JSON Data (Sample)" %}</h3>
+            <div class="preview-content">
+                <pre class="code-block" id="raw-json"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function($) {
+    var previewUrl = '{% url "admin:graphql_resource_preview_ajax" original.pk %}';
+    var resourceId = '{{ original.pk }}';
+    var previewTab = $('#fieldsetcollapser5'); // Target the Preview tab (adjust number if needed)
+    var previewLoaded = false;
+    var currentItemIndex = 0;
+    var totalItems = 0;
+    
+    // Function to load preview data with a specific item index
+    function loadPreview(itemIndex) {
+        currentItemIndex = itemIndex || 0;
+        
+        $('#preview-loading').show();
+        $('#preview-content').hide();
+        $('#preview-error').hide();
+        $('#preview-status').text('');
+        
+        // Update the item index input
+        $('#item-index').val(currentItemIndex);
+        
+        // Make the AJAX request with the item index as a parameter
+        $.ajax({
+            url: previewUrl,
+            type: 'GET',
+            data: { item_index: currentItemIndex },
+            dataType: 'json',
+            success: function(data) {
+                $('#preview-loading').hide();
+                
+                if (data.error) {
+                    $('#preview-error').text(data.error).show();
+                    return;
+                }
+                
+                // Update item count information
+                totalItems = data.total_items || 0;
+                updateItemCount();
+                
+                // Update navigation button states
+                updateNavButtons();
+                
+                // Update URL template section
+                if (data.source_url_template) {
+                    $('#url-template-section').show();
+                    $('#no-url-template-section').hide();
+                    $('#template-with-placeholders').html(data.template_with_placeholders);
+                    $('#processed-url').text(data.processed_url).attr('href', data.processed_url);
+                } else {
+                    $('#url-template-section').hide();
+                    $('#no-url-template-section').show();
+                    $('#resource-url').text(data.resource_url).attr('href', data.resource_url);
+                }
+                
+                // Update markdown and JSON content
+                $('#markdown-content').text(data.markdown);
+                $('#raw-json').text(data.raw_json);
+                
+                // Show content
+                $('#preview-content').show();
+                $('#preview-status').text('Preview loaded successfully').addClass('success-message');
+                setTimeout(function() {
+                    $('#preview-status').text('').removeClass('success-message');
+                }, 3000);
+                
+                previewLoaded = true;
+            },
+            error: function(xhr, status, error) {
+                $('#preview-loading').hide();
+                $('#preview-error').text('Error loading preview: ' + error).show();
+            }
+        });
+    }
+    
+    // Update the item count display
+    function updateItemCount() {
+        if (totalItems > 0) {
+            $('#item-count').text('Item ' + (currentItemIndex + 1) + ' of ' + totalItems);
+        } else {
+            $('#item-count').text('');
+        }
+    }
+    
+    // Update navigation button states
+    function updateNavButtons() {
+        // Disable previous button if at first item
+        $('#prev-item').prop('disabled', currentItemIndex <= 0);
+        
+        // Disable next button if at last item or total is unknown
+        $('#next-item').prop('disabled', totalItems > 0 && currentItemIndex >= totalItems - 1);
+    }
+    
+    // Handle navigation button clicks
+    $('#prev-item').on('click', function() {
+        if (currentItemIndex > 0) {
+            loadPreview(currentItemIndex - 1);
+        }
+    });
+    
+    $('#next-item').on('click', function() {
+        loadPreview(currentItemIndex + 1);
+    });
+    
+    // Handle direct input of item index
+    $('#item-index').on('change', function() {
+        var newIndex = parseInt($(this).val(), 10);
+        if (!isNaN(newIndex) && newIndex >= 0) {
+            // If we know total items, enforce upper bound
+            if (totalItems > 0 && newIndex >= totalItems) {
+                newIndex = totalItems - 1;
+                $(this).val(newIndex);
+            }
+            loadPreview(newIndex);
+        }
+    });
+    
+    // Run preview when tab is expanded
+    previewTab.on('click', function() {
+        // Check if the tab is being expanded (not collapsed)
+        // In Django admin, clicking a tab toggles a 'collapsed' class
+        if ($(this).parent().hasClass('collapsed')) {
+            // Tab is being expanded
+            if (!previewLoaded) {
+                // Only load if not already loaded
+                loadPreview(currentItemIndex);
+            }
+        }
+    });
+    
+    // Run preview when button is clicked
+    $('#run-preview-button').on('click', function() {
+        loadPreview(currentItemIndex);
+    });
+    
+    // If the Preview tab is already open when the page loads, load the preview
+    $(document).ready(function() {
+        if (!previewTab.parent().hasClass('collapsed')) {
+            loadPreview(currentItemIndex);
+        }
+        
+        // Initialize button states
+        updateNavButtons();
+    });
+})(django.jQuery);
+</script>

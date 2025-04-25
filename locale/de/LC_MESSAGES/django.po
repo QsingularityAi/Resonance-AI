@@ -1,0 +1,537 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-07 15:40+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: backend/api/admin/chatbot.py:128
+msgid "Basic Information"
+msgstr "Grundlegende Informationen"
+
+#: backend/api/admin/chatbot.py:140
+msgid "Appearance"
+msgstr "Erscheinungsbild"
+
+#: backend/api/admin/chatbot.py:149
+msgid "Contact Details"
+msgstr "Kontaktdaten"
+
+#: backend/api/admin/chatbot.py:155
+msgid "Integration"
+msgstr "Integration"
+
+#: backend/api/admin/chatbot.py:181 backend/api/models.py:86
+msgid "Knowledgebases"
+msgstr "Wissensbasen"
+
+#: backend/api/admin/chatbot.py:189
+msgid "Logo"
+msgstr "Logo"
+
+#: backend/api/admin/chatbot.py:195
+msgid "Avatar"
+msgstr "Avatar"
+
+#: backend/api/admin/chatbot.py:200
+msgid "No logo uploaded"
+msgstr "Kein Logo hochgeladen"
+
+#: backend/api/admin/chatbot.py:205
+msgid "No avatar uploaded"
+msgstr "Kein Avatar hochgeladen"
+
+#: backend/api/admin/chatbot.py:217
+msgid "Colors"
+msgstr "Farben"
+
+#: backend/api/admin/chatbot.py:276
+msgid "Embed Code"
+msgstr "Einbettungscode"
+
+#: backend/api/admin/tenant.py:11 backend/api/admin/user.py:113
+#: backend/api/admin/user.py:225 backend/api/models.py:26
+msgid "Tenant"
+msgstr "Mandant"
+
+#: backend/api/admin/tenant.py:12 backend/api/models.py:27
+msgid "Tenants"
+msgstr "Mandanten"
+
+#: backend/api/admin/throttle_admin_login.py:27
+msgid "Too many login attempts. Please try again later."
+msgstr "Zu viele Anmeldeversuche. Bitte versuchen Sie es später erneut."
+
+#: backend/api/admin/translation_feld_mixin.py:25
+msgid "Translations"
+msgstr "Übersetzungen"
+
+#: backend/api/admin/user.py:41 backend/api/admin/user.py:148
+#: backend/api/admin/user.py:203
+msgid "Profile"
+msgstr "Profil"
+
+#: backend/api/admin/user.py:87 backend/api/admin/user.py:119
+#: backend/api/models.py:45
+msgid ""
+"Designates that this user can manage users and groups within their tenant."
+msgstr "Legt fest, dass dieser Benutzer Benutzer und Gruppen innerhalb seines Mandanten verwalten kann."
+
+#: backend/api/admin/user.py:94 backend/api/admin/user.py:448
+msgid ""
+"This tenant admin was created by another admin. You can view but not edit "
+"their details."
+msgstr "Dieser Mandantenadministrator wurde von einem anderen Administrator erstellt. Sie können seine Details anzeigen, aber nicht bearbeiten."
+
+#: backend/api/admin/user.py:98
+msgid "Only tenant administrators can change this setting."
+msgstr "Nur Mandantenadministratoren können diese Einstellung ändern."
+
+#: backend/api/admin/user.py:114
+msgid "The tenant this user belongs to."
+msgstr "Der Mandant, zu dem dieser Benutzer gehört."
+
+#: backend/api/admin/user.py:118
+msgid "Tenant Administrator"
+msgstr "Mandantenadministrator"
+
+#: backend/api/admin/user.py:147 backend/api/admin/user.py:154
+#: backend/api/admin/user.py:171 backend/api/admin/user.py:202
+msgid "Personal info"
+msgstr "Persönliche Informationen"
+
+#: backend/api/admin/user.py:155
+msgid "Permissions"
+msgstr "Berechtigungen"
+
+#: backend/api/admin/user.py:158 backend/api/admin/user.py:173
+msgid "Important dates"
+msgstr "Wichtige Daten"
+
+#: backend/api/admin/user.py:172
+msgid "Account status"
+msgstr "Kontostatus"
+
+#: backend/api/admin/user.py:233
+msgid "Tenant Admin"
+msgstr "Mandantenadministrator"
+
+#: backend/api/admin/user.py:412
+msgid "Only global administrators can assign superuser status."
+msgstr "Nur globale Administratoren können den Superuser-Status zuweisen."
+
+#: backend/api/admin/user.py:415
+msgid "Tenant administrators cannot grant Django admin access (staff status)."
+msgstr "Mandantenadministratoren können keinen Django-Admin-Zugriff (Mitarbeiterstatus) gewähren."
+
+#: backend/api/admin/user.py:421
+msgid "Manage access via Tenant Groups instead."
+msgstr "Verwalten Sie den Zugriff stattdessen über Mandantengruppen."
+
+#: backend/api/admin/user.py:425
+msgid "Specific permissions are managed globally."
+msgstr "Spezifische Berechtigungen werden global verwaltet."
+
+#: backend/api/chat/chat.py:28
+msgid "complex_topic"
+msgstr ""
+"Es handelt sich hierbei um einen komplexen Themenbereich. Bitte prüfe daher "
+"alle Antworten und Quellen sorgfältig, insbesondere bei wichtigen "
+"Entscheidungen."
+
+#: backend/api/chat/chat.py:87
+msgid ""
+"I didn't catch any audio. Could you please check that your microphone is "
+"connected and not muted? Try recording again, or feel free to type your "
+"message instead."
+msgstr ""
+"Ich konnte keine Audioeingabe erkennen. Bitte überprüfen Sie, ob Ihr "
+"Mikrofon angeschlossen und nicht stummgeschaltet ist. Versuchen Sie es "
+"erneut mit der Aufnahme oder geben Sie Ihre Nachricht als Text ein."
+
+#: backend/api/languages.py:6
+msgid "German"
+msgstr "Deutsch"
+
+#: backend/api/languages.py:7
+msgid "English"
+msgstr "Englisch"
+
+#: backend/api/languages.py:8
+msgid "Turkish"
+msgstr "Türkisch"
+
+#: backend/api/languages.py:9
+msgid "Russian"
+msgstr "Russisch"
+
+#: backend/api/languages.py:10
+msgid "Arabic"
+msgstr "Arabisch"
+
+#: backend/api/models.py:20 backend/api/models.py:77 backend/api/models.py:178
+msgid "name"
+msgstr "Name"
+
+#: backend/api/models.py:44
+msgid "tenant administrator"
+msgstr "Mandantenadministrator"
+
+#: backend/api/models.py:53
+msgid "created by"
+msgstr "Erstellt von"
+
+#: backend/api/models.py:54
+msgid "The admin who created this user."
+msgstr "Der Administrator, der diesen Benutzer erstellt hat."
+
+#: backend/api/models.py:78
+msgid "description"
+msgstr "Beschreibung"
+
+#: backend/api/models.py:85 crawler/models.py:33
+msgid "Knowledgebase"
+msgstr "Wissensbasis"
+
+#: backend/api/models.py:100
+msgid "primary color"
+msgstr "Hauptfarbe"
+
+#: backend/api/models.py:101
+msgid "text color"
+msgstr "Textfarbe"
+
+#: backend/api/models.py:102
+msgid "header title"
+msgstr "Header Überschrift"
+
+#: backend/api/models.py:103
+msgid "assistant name"
+msgstr "Chatbot Name"
+
+#: backend/api/models.py:104
+msgid "prompt extras for main prompt"
+msgstr "Zusätzliche Eingaben für den Hauptprompt"
+
+#: backend/api/models.py:105
+msgid "prompt extras for query-optimizer"
+msgstr "Zusätzliche Eingaben für den Abfrageoptimiererer"
+
+#: backend/api/models.py:106
+msgid "prompt extras for related questions"
+msgstr "Zusätzliche Eingaben für verwandte Fragen"
+
+#: backend/api/models.py:107
+msgid "prompt extras for for no sources answer"
+msgstr "Zusätzliche Eingaben für Antworten ohne Quellen"
+
+#: backend/api/models.py:108
+msgid "logo"
+msgstr "Logo"
+
+#: backend/api/models.py:109
+msgid "avatar"
+msgstr "Avatar"
+
+#: backend/api/models.py:112
+msgid "Default"
+msgstr "Standard"
+
+#: backend/api/models.py:113
+msgid "Glass (same as default)"
+msgstr "Glas (wie Standard)"
+
+#: backend/api/models.py:114
+msgid "DOSB"
+msgstr "DOSB"
+
+#: backend/api/models.py:120
+msgid "Chatbot Style"
+msgstr "Chatbot-Stil"
+
+#: backend/api/models.py:124
+msgid "contact name"
+msgstr "Allgemeiner Kontakt Name"
+
+#: backend/api/models.py:125
+msgid "contact email"
+msgstr "Allgemeiner Kontakt E-Mail"
+
+#: backend/api/models.py:126
+msgid "technical contact name"
+msgstr "Technischer Kontakt Name"
+
+#: backend/api/models.py:127
+msgid "technical contact email"
+msgstr "Technischer Kontakt E-Mail"
+
+#: backend/api/models.py:130
+msgid "welcome title"
+msgstr "Willkommenstitel"
+
+#: backend/api/models.py:131
+msgid "welcome text"
+msgstr "Willkommenstext"
+
+#: backend/api/models.py:132
+msgid "welcome additional text"
+msgstr "Weiterer Willkommenstext"
+
+#: backend/api/models.py:133
+msgid "first message"
+msgstr "Erste Nachricht"
+
+#: backend/api/models.py:135 backend/api/models.py:183
+msgid "knowledgebase"
+msgstr "Wissensbasis"
+
+#: backend/api/models.py:144
+msgid "Chatbot"
+msgstr "Chatbot"
+
+#: backend/api/models.py:145
+msgid "Chatbots"
+msgstr "Chatbots"
+
+#: backend/api/models.py:188 backend/api/models.py:221
+msgid "FAQ"
+msgstr "FAQ"
+
+#: backend/api/models.py:189 backend/api/models.py:222
+msgid "FAQs"
+msgstr "FAQs"
+
+#: backend/api/models.py:209
+msgid "category"
+msgstr "Kategorie"
+
+#: backend/api/models.py:213
+msgid "question"
+msgstr "Frage"
+
+#: backend/api/models.py:216
+msgid "answer"
+msgstr "Antwort"
+
+#: backend/api/templates/admin/custom_change_form.html:8
+msgid "Warning: Any unsaved changes will be lost. Continue?"
+msgstr ""
+"Warnung: Alle nicht gespeicherten Änderungen gehen verloren. Fortfahren?"
+
+#: backend/api/templates/admin/custom_change_form.html:9
+msgid "Automatically translate empty fields"
+msgstr "Leere Felder automatisch übersetzen"
+
+#: backend/api/templates/admin/faqcategory_changelist.html:6
+msgid "Export FAQ Categories"
+msgstr "FAQ-Kategorien exportieren"
+
+#: backend/api/templates/admin/faqcategory_changelist.html:9
+msgid "Import FAQ Categories"
+msgstr "FAQ-Kategorien importieren"
+
+#: backend/templates/admin/base.html:106
+msgid "Search"
+msgstr "Suche"
+
+#: backend/templates/admin/base.html:167
+msgid "Account"
+msgstr "Konto"
+
+#: backend/templates/admin/base.html:170
+msgid "Change password"
+msgstr "Passwort ändern"
+
+#: backend/templates/admin/base.html:175
+msgid "Log out"
+msgstr "Abmelden"
+
+#: backend/templates/admin/base.html:186
+msgid "See Profile"
+msgstr "Profil anzeigen"
+
+#: backend/templates/admin/base.html:230
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: backend/templates/admin/base.html:342
+msgid "Jazzmin version"
+msgstr "Jazzmin-Version"
+
+#: backend/templates/admin/base.html:345
+msgid "Copyright"
+msgstr "Urheberrecht"
+
+#: backend/templates/admin/base.html:345
+msgid "All rights reserved."
+msgstr "Alle Rechte vorbehalten."
+
+#: backend/templates/admin/base.html:361
+msgid "UI Configuration"
+msgstr "UI-Konfiguration"
+
+#: backend/templates/admin/base.html:365
+msgid "Copy this info your settings file to persist these UI changes"
+msgstr "Kopieren Sie diese Informationen in Ihre Einstellungsdatei, um diese UI-Änderungen beizubehalten"
+
+#: backend/templates/admin/base.html:369
+msgid "Close"
+msgstr "Schließen"
+
+#: crawler/dataclasses.py:6
+msgid "Pending"
+msgstr "Warte"
+
+#: crawler/dataclasses.py:7
+msgid "Started"
+msgstr "Läuft"
+
+#: crawler/dataclasses.py:8
+msgid "Stopping"
+msgstr "Beende"
+
+#: crawler/models.py:26
+msgid "Website-URL"
+msgstr "Website-URL"
+
+#: crawler/models.py:37
+msgid "Crawl the entire page or only the provided link"
+msgstr "Die gesamte Seite durchsuchen oder nur den angegebenen Link"
+
+#: crawler/models.py:38
+msgid "Deep Crawl"
+msgstr "Tiefensuche"
+
+#: crawler/models.py:43
+msgid ""
+"Time (in days) after which an already crawled resource is crawled again.\n"
+" The value '0' disables recrawling. The crawling interval  needs to be less "
+"than the delete intervall"
+msgstr ""
+"Zeit (in Tagen) nach der eine bereits gecrawlte Ressource erneut gecrawlt "
+"wird.\n"
+" Der Wert '0' deaktiviert erneutes Crawlen. Das Crawling-Intervall muss "
+"kleiner sein als das Lösch-Intervall"
+
+#: crawler/models.py:44
+msgid "Crawling interval"
+msgstr "Crawling Intervall"
+
+#: crawler/models.py:50
+msgid ""
+"Time (in days) after which an already crawled resource is deleted.\n"
+" The value '0' disables resource deletion"
+msgstr ""
+"Zeit (in Tagen) nach der eine bereits gecrawlte Ressource gelöscht wird.\n"
+" Der Wert '0' deaktiviert das Löschen von Ressourcen"
+
+#: crawler/models.py:51
+msgid "Delete missing resources after days"
+msgstr "Fehlende Ressourcen nach löschen nach x Tagen"
+
+#: crawler/models.py:56
+msgid "The date and time the link was last cralwed"
+msgstr "Datum und Uhrzeit des letzten Crawl-Vorgangs"
+
+#: crawler/models.py:57
+msgid "Last Crawl Start"
+msgstr "Letzter Crawl-Start"
+
+#: crawler/models.py:62
+msgid "The date and time the last crawl finished"
+msgstr "Datum und Uhrzeit des letzten abgeschlossenen Crawl-Vorgangs"
+
+#: crawler/models.py:63
+msgid "Last Crawl End"
+msgstr "Letztes Crawl-Ende"
+
+#: crawler/models.py:68
+msgid "The number of resources found in the crawl"
+msgstr "Die Anzahl der beim Crawlen gefundenen Ressourcen"
+
+#: crawler/models.py:69
+msgid "Number of Resources Processed"
+msgstr "Anzahl verarbeiteter Ressourcen"
+
+#: crawler/models.py:75
+msgid ""
+"A selector in which webpage content is found; For Example Typo3 '#main'-"
+"selector"
+msgstr ""
+"Ein Selektor, in dem Webseiteninhalte gefunden werden; Zum Beispiel Typo3 "
+"'#main'-Selektor"
+
+#: crawler/models.py:76
+msgid "Content Selector"
+msgstr "Inhaltsauswahl"
+
+#: crawler/models.py:82
+msgid ""
+"A comma-separated list of selectors, to be removed before content processing"
+msgstr ""
+"Eine kommagetrennte Liste von Selektoren, die vor der Inhaltsverarbeitung "
+"entfernt werden sollen"
+
+#: crawler/models.py:83
+msgid "Excluded Selectors"
+msgstr "Ausgeschlossene Selektoren"
+
+#: crawler/models.py:89
+msgid "Crawling Status"
+msgstr "Crawling Intervall"
+
+#: crawler/models.py:93
+msgid "Created At"
+msgstr "Erstellt am"
+
+#: crawler/models.py:113
+msgid "Quell Link mit diesem Website-URL existiert bereits."
+msgstr "Quell Link mit diesem Website-URL existiert bereits."
+
+#: crawler/models.py:117
+msgid "Crawl Link"
+msgstr "Quell Link"
+
+#: crawler/models.py:118
+msgid "Crawl Links"
+msgstr "Quell Links"
+
+#: hw_rag/base_rag.py:138 hw_rag/related_question_generator.py:53
+msgid "Now answer in language:"
+msgstr "Jetzt antworten in Sprache:"
+
+#~ msgid "FAQ Category"
+#~ msgstr "FAQ-Kategorie"
+
+#~ msgid ""
+#~ "If the resource is a pdf, check the whole pdf instead of the first 1024 "
+#~ "bytes"
+#~ msgstr ""
+#~ "Wenn die Ressource ein PDF ist, prüfe das gesamte PDF anstatt nur der "
+#~ "ersten 1024 Bytes"
+
+#~ msgid "Disable file change detection optimization"
+#~ msgstr "Dateiänderungserkennung-Optimierung deaktivieren"
+
+#~ msgid ""
+#~ "Requeue already existing resources for RAG Processing, else only new "
+#~ "content is processed"
+#~ msgstr ""
+#~ "Bereits vorhandene Ressourcen für RAG-Verarbeitung neu einreihen, sonst "
+#~ "wird nur neuer Inhalt verarbeitet"
+
+#~ msgid "Requeue found duplicates"
+#~ msgstr "Erneute Verarbeitung bestehender Daten aktivieren"

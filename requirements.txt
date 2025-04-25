@@ -1,0 +1,25 @@
+django==5.1.3
+djangorestframework==3.15.2
+dj-database-url==2.3.0
+gunicorn==23.0.0
+whitenoise==6.8.2
+django-cors-headers==4.6.0
+drf-spectacular~=0.27.2
+django-celery-beat~=2.7.0
+python-dotenv~=1.0.1
+mysqlclient~=2.2.6
+celery~=5.4.0
+openai~=1.55.3
+requests~=2.32.2
+ffmpeg-python==0.2.0
+qdrant-client>=1.12.1
+django-jazzmin==3.0.1
+django-modeltranslation==0.19.11
+pillow==11.0.0 # for image fields in admin
+crochet~=2.1.1
+piwikapi==0.3
+pymongo~=4.10.1
+django-revproxy==0.13.0
+sentry-sdk[django]==2.19.2
+django-health-check==3.18.3
+django-redis==5.4.0

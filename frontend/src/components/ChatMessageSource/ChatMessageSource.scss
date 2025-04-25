@@ -1,0 +1,40 @@
+.source {
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  background: var(--primary-color20);
+  color: var(--primary-color);
+  padding: 4px 4px 4px 8px;
+  align-items: center;
+  align-content: center;
+  gap: 8px;
+  border-radius: 4px;
+  font-size: 0.75em;
+  line-height: 1em;
+}
+
+.source__type {
+  display: inline-block;
+  background: var(--primary-color80);
+  color: var(--primary-color20);
+  border-radius: 4px;
+  font-size: 0.85em;
+  padding: 2px;
+  align-self: flex-start;
+}
+
+.chat-message {
+  &--variant-glass {
+    .source {
+      --primary-color: #000;
+      --primary-color20: #f8f9fc;
+      --primary-color80: #000;
+    }
+  }
+}
+
+.chat-window--high-contrast {
+  .source {
+    color: var(--high-contrast-on-light-text-color);
+  }
+}

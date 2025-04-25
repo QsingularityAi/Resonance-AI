@@ -1,0 +1,115 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    .help {
+        color: #666;
+        font-size: 11px;
+        padding-left: 0;
+    }
+    #upload-status {
+        margin-top: 10px;
+        display: none;
+        color: #666;
+    }
+    .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        <form method="post" enctype="multipart/form-data" id="import-form">
+            {% csrf_token %}
+            <fieldset class="module aligned">
+                <div class="form-row">
+                    <label for="csv_file">CSV File:</label>
+                    <input type="file"
+                           name="csv_file"
+                           id="csv_file"
+                           accept=".csv,text/csv,application/vnd.ms-excel,application/csv,text/x-csv,application/x-csv"
+                           required
+                           onclick="this.value = null">
+                    <p class="help">Upload a CSV file with columns: id (optional), question, answer</p>
+                    <div id="upload-status">
+                        <img src="{% static 'admin/img/icon-loading.gif' %}" class="loading">
+                        Processing file...
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="remove_others">
+                        <input type="checkbox" name="remove_others" id="remove_others">
+                        Remove FAQs not in import file
+                    </label>
+                    <p class="help">If checked, FAQs in this category that are not in the import file will be deleted</p>
+                </div>
+            </fieldset>
+            <div class="submit-row">
+                <input type="submit" value="Import" class="default" id="submit-button">
+            </div>
+        </form>
+    </div>
+
+ <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('csv_file');
+            const uploadStatus = document.getElementById('upload-status');
+            const submitButton = document.getElementById('submit-button');
+            const form = document.getElementById('import-form');
+
+            fileInput.addEventListener('change', function(e) {
+                try {
+                    const file = e.target.files[0];
+                    if (!file) return;
+
+                    // Reset status
+                    uploadStatus.style.display = 'none';
+                    submitButton.disabled = false;
+
+                    // Safely handle filename
+                    const fileName = decodeURIComponent(escape(file.name.toLowerCase()));
+                    const fileType = (file.type || '').toLowerCase();
+
+                    const isCSV =
+                        fileName.endsWith('.csv') ||
+                        fileType === 'text/csv' ||
+                        fileType === 'application/csv' ||
+                        fileType === 'application/vnd.ms-excel' ||
+                        fileType === 'text/x-csv' ||
+                        fileType === 'application/x-csv';
+
+                    if (!isCSV) {
+                        alert('Please select a CSV file');
+                        fileInput.value = '';
+                        return;
+                    }
+
+                    // Validate file size (5MB limit)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('File is too large. Maximum size is 5MB');
+                        fileInput.value = '';
+                        return;
+                    }
+                } catch (error) {
+                    console.error('Error handling file:', error);
+                    fileInput.value = '';
+                    alert('There was an error processing the file. Please try renaming it to use only basic characters (A-Z, 0-9).');
+                }
+            });
+
+            form.addEventListener('submit', function(e) {
+                if (fileInput.files.length > 0) {
+                    uploadStatus.style.display = 'block';
+                    submitButton.disabled = true;
+                }
+            });
+        });
+    </script>
+{% endblock %}

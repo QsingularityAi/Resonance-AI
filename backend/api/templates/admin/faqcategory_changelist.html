@@ -1,0 +1,12 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+
+{% block object-tools-items %}
+    <li>
+        <a href="{% url 'admin:faqcategory_export' %}" class="export-button">{% trans "Export FAQ Categories" %}</a>
+    </li>
+    <li>
+        <a href="{% url 'admin:faqcategory_import' %}" class="import-button">{% trans "Import FAQ Categories" %}</a>
+    </li>
+    {{ block.super }}
+{% endblock %}

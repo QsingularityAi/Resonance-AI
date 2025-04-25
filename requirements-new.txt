@@ -1,0 +1,8 @@
+# add new base requirements here
+tiktoken==0.8.0
+dependency-injector==4.45.0
+pytest-django==4.10.0
+pytest-mock==3.14.0
+django-extra-settings==0.13.0
+django-scopes==2.0.0
+webdav4==0.10.0
